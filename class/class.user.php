@@ -63,12 +63,8 @@ class UserController extends control{
     {
         $data = $request->getParsedBody();
         $result = $this->db->user()->insert($data);
-        if(!$result)
-        {
-            return $this->error('createFail');
-        } else {
-            return $this->success();
-        }
+        if(!$result) return $this->error('createFail');
+        return $this->success();
     }
 
     public function update($request, $response, $args)
@@ -78,12 +74,8 @@ class UserController extends control{
             ->select("id")
             ->where('id',$data['id'])
             ->update($data);
-        if(!$result)
-        {
-            return $this->error('updateFail');
-        } else {
-            return $this->success();
-        }
+        if(!$result) return $this->error('updateFail');
+        return $this->success();
     }
 
     public function delete($request, $response, $args)
@@ -93,7 +85,9 @@ class UserController extends control{
             ->select("id")
             ->where('id',$data['id'])
             ->delete();
-        var_dump($result);
+
+        if(!$result) return $this->error('deleteFail');
+        return $this->success();
     }
 
 }
