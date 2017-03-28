@@ -85,7 +85,6 @@ class UserController extends control{
             ->select("id")
             ->where('id',$data['id'])
             ->delete();
-
         if(!$result) return $this->error('deleteFail');
         return $this->success();
     }
